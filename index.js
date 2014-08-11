@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 var program = require("commander");
-var platform = require("platform");
+var platform = require("simple-platform");
 var path = require("path");
 var printf = require("printf");
 var mkdirp = require("mkdirp");
@@ -15,7 +17,6 @@ program.version("1.0.0")
     .option("-a, --apps")
     .option("--settings","Display Settings")
     .parse(process.argv);
-
 
 
 function getConfig() {
@@ -58,7 +59,6 @@ function createSettings(){
         }
     }
 
-
     if (!fs.existsSync(config.alias)) {
         fs.writeFileSync(config.alias, JSON.stringify({}), { encoding: "utf8" });
     }
@@ -86,6 +86,7 @@ function add(name, app) {
 
 var settings = createSettings();
 
+console.log(settings.alias);
 var applications = require(settings.alias);
 
 if (program.name && program.path) {
