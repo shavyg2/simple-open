@@ -15,10 +15,14 @@ program.version("1.0.0")
     .option("-n,--name [value]", "Name of Application")
     .option("-p,--path [value]", "Path of Application")
     .option("-a, --apps")
-    .option("--settings","Display Settings")
-    .parse(process.argv);
-
-
+    .option("--settings","Display Settings");
+	
+program.on("--help",function(){
+	console.log("Usage: \nopen program_alias [args...]");
+	console.log("open /add -n program_alias -p program_path");
+});
+program.parse(process.argv);
+	
 function getConfig() {
     var HomeFolder = "OpenApp";
     var config = {
@@ -85,8 +89,6 @@ function add(name, app) {
 ///////////Application
 
 var settings = createSettings();
-
-console.log(settings.alias);
 var applications = require(settings.alias);
 
 if (program.name && program.path) {
